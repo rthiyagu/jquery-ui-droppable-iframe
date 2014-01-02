@@ -43,17 +43,17 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
 
         // If the element is within an another document...
         if ((doc = m[i].document[0]) !== document) {
-            // Determine in the fame offset using cached offset (if already calculated)
+            // Determine in the frame offset using cached offset (if already calculated)
             frameOffset = $.ui.ddmanager.frameOffsets[doc];
             if (!frameOffset) {
-                frameOffset = $.ui.ddmanager.frameOffsets[doc] =
-                    $((m[i].document[0].defaultView || m[i].document[0].parentWindow).frameElement).offset();
+                frameOffset = $.ui.ddmanager.frameOffsets[doc] = $(
+                    (doc.defaultView || doc.parentWindow).frameElement
+                ).offset();
             }
 
             // Add the frame offset to the calculated offset
             m[i].offset.left += frameOffset.left;
             m[i].offset.top += frameOffset.top;
-
         }
     }
 };
