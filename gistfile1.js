@@ -1,4 +1,8 @@
+// Create new object to cache iframe offsets
 $.ui.ddmanager.frameOffsets = {};
+
+// Override the native `prepareOffsets` method. This is almost
+// identical to the un-edited method, except for the last part!
 $.ui.ddmanager.prepareOffsets = function (t, event) {
     var i, j,
         m = $.ui.ddmanager.droppables[t.options.scope] || [],
@@ -32,6 +36,10 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
         }
 
         m[i].offset = m[i].element.offset();
+        m[i].proportions = { width: m[i].element[0].offsetWidth, height: m[i].element[0].offsetHeight };
+        
+        
+        /* ============ Here comes the fun bit! =============== */
 
         // If the element is within an another document...
         if ((doc = m[i].document[0]) !== document) {
@@ -46,8 +54,6 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
             m[i].offset.left += frameOffset.left;
             m[i].offset.top += frameOffset.top;
 
-            // Re-calculate proportions
-            m[i].proportions = { width: m[i].element[0].offsetWidth, height: m[i].element[0].offsetHeight };
         }
     }
 };
