@@ -46,7 +46,9 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
             // Determine in the frame offset using cached offset (if already calculated)
             frameOffset = $.ui.ddmanager.frameOffsets[doc];
             if (!frameOffset) {
+                // Calculate and cache the offset in our new `$.ui.ddmanager.frameOffsets` object
                 frameOffset = $.ui.ddmanager.frameOffsets[doc] = $(
+                    // Different browsers store it on different properties (IE...)
                     (doc.defaultView || doc.parentWindow).frameElement
                 ).offset();
             }
