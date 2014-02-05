@@ -20,7 +20,7 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
         // Filter out elements in the current dragged item
         for (j = 0; j < list.length; j++) {
             if (list[j] === m[i].element[0]) {
-                m[i].proportions.height = 0;
+                m[i].proportions().height = 0;
                 continue droppablesLoop;
             }
         }
@@ -36,7 +36,7 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
         }
 
         m[i].offset = m[i].element.offset();
-        m[i].proportions = { width: m[i].element[0].offsetWidth, height: m[i].element[0].offsetHeight };
+        m[i].proportions({ width: m[i].element[0].offsetWidth, height: m[i].element[0].offsetHeight });
         
         
         /* ============ Here comes the fun bit! =============== */
