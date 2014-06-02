@@ -38,7 +38,7 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
         // Re-calculate offset
         m[i].offset = m[i].element.offset();
 
-        // Re-calculate proportions
+        // Re-calculate proportions (jQuery UI ~1.10 introduced a `proportions` cache method, so support both here!)
         proportions = { width: m[i].element[0].offsetWidth, height: m[i].element[0].offsetHeight };
         typeof m[i].proportions === 'function' ? m[i].proportions(proportions) : (m[i].proportions = proportions);
         
