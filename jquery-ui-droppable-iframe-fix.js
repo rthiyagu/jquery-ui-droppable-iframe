@@ -17,7 +17,7 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
             continue;
         }
  
-        // Filter out elements in the current dragged item
+        // Filter out elements in the current dragoged item
         for (j = 0; j < list.length; j++) {
             if (list[j] === m[i].element[0]) {
                 m[i].proportions().height = 0;
@@ -34,6 +34,9 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
         if (type === "mousedown") {
             m[i]._activate.call(m[i], event);
         }
+        
+        // Re-calculate offset
+        m[i].offset = m[i].element.offset();
 
         // Re-calculate proportions
         proportions = { width: m[i].element[0].offsetWidth, height: m[i].element[0].offsetHeight };
