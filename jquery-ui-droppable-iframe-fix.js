@@ -35,6 +35,9 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
             m[i]._activate.call(m[i], event);
         }
 
+        // Re-calculate proportions
+        proportions = { width: m[i].element[0].offsetWidth, height: m[i].element[0].offsetHeight };
+        typeof m[i].proportions === 'function' ? m[i].proportions(proportions) : (m[i].proportions = proportions);
         
         /* ============ Here comes the fun bit! =============== */
  
@@ -54,9 +57,5 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
             m[i].offset.left += frameOffset.left;
             m[i].offset.top += frameOffset.top;
         }
-
-        // Re-calculate proportions
-        proportions = { width: m[i].element[0].offsetWidth, height: m[i].element[0].offsetHeight };
-        typeof m[i].proportions === 'function' ? m[i].proportions(proportions) : (m[i].proportions = proportions);
     }
 };
