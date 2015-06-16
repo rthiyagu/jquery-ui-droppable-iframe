@@ -31,11 +31,11 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
             }
         }
 
-        m[i].visible = m[i].element.css("display") !== "none";
-        if (!m[i].visible || !$.ui.ddmanager.isElementInViewport(m[i].element[0])) {
-            console.log('element is not visible, nothing to do');
-            continue;
-        }
+        // m[i].visible = m[i].element.css("display") !== "none";
+        // if (!m[i].visible || !$.ui.ddmanager.isElementInViewport(m[i].element[0])) {
+        //     console.log('element is not visible, nothing to do');
+        //     continue;
+        // }
 
         //Activate the droppable if used directly from draggables
         if (type === "mousedown") {
