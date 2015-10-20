@@ -57,7 +57,7 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
             }
             
             // Determine the scroll offset
-            scrollOffset = { left: m[i].document[0].scrollLeft, top: m[i].document[0].scrollTop};
+            scrollOffset = { left: $(doc).scrollLeft, top: $(doc).scrollTop};
  
             // Add the frame and scroll offsets to the calculated offset
             m[i].offset.left += frameOffset.left + scrollOffset.left;
