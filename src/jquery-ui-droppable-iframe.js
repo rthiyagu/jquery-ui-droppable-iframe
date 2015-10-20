@@ -55,10 +55,13 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
                     (doc.defaultView || doc.parentWindow).frameElement
                 ).offset();
             }
+            
+            // Determine the scroll offset
+            scrollOffset = { left: m[i].element[0].ownerDocument.children[0].scrollLeft, top: m[i].element[0].ownerDocument.children[0].scrollTop};
  
-            // Add the frame offset to the calculated offset
-            m[i].offset.left += frameOffset.left;
-            m[i].offset.top += frameOffset.top;
+            // Add the frame and scroll offsets to the calculated offset
+            m[i].offset.left += frameOffset.left + scrollOffset.left;
+            m[i].offset.top += frameOffset.top + scrollOffset.top;
         }
     }
 };
