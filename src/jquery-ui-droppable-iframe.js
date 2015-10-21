@@ -59,20 +59,10 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
             // prepare to determine the scroll offsets by ascending all parents and aggregating
             scrollOffset = { left: 0, top: 0 };
             
-            parentNodes = m[i].element.parents();
-            while (parentNodes.length) {
-              var parent = parentNodes.shift;
-
-              console.log(this.tagName + " " + $(this).attr('id'));
-              
-              if (this.tagName === 'html') {
-               parentNodes.push($((doc.defaultView || doc.parentWindow).frameElement).parents());
-              }
-              else {
-                scrollOffset.left += $(this).scrollLeft();
-                scrollOffset.top += $(this).scrollTop();
-              }
-            };
+            $(doc.defaultView || doc.parentWindow).frameElement).parents().map({
+              scrollOffset.left += $(this).scrollLeft();
+              scrollOffset.top += $(this).scrollTop();
+            });
 
             // Add the frame and scroll offsets to the calculated offset
             m[i].offset.left += frameOffset.left - scrollOffset.left;
