@@ -62,7 +62,7 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
                 scrollOffset = { left: 0, top: 0 };
               }
               
-              if (this.parents()) {
+              if (this.tagName != 'html') {
                 console.log(this.tagName);
                 scrollOffset.left += this.scrollLeft();
                 scrollOffset.top += this.scrollTop();
