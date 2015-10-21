@@ -70,8 +70,8 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
             });
 
             // Add the frame and scroll offsets to the calculated offset
-            m[i].offset.left += frameOffset.left + scrollOffset.left;
-            m[i].offset.top += frameOffset.top + scrollOffset.top;
+            m[i].offset.left += frameOffset.left - scrollOffset.left;
+            m[i].offset.top += frameOffset.top - scrollOffset.top;
         }
     }
 };
