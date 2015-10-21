@@ -59,7 +59,7 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
             // prepare to determine the scroll offsets by ascending all parents and aggregating
             scrollOffset = { left: 0, top: 0 };
             
-            $(doc.defaultView || doc.parentWindow).frameElement.parents().map({
+            $(doc.defaultView || doc.parentWindow).frameElement.parents().each(function() {
               console.log(this.tagName);
               scrollOffset.left += $(this).scrollLeft();
               scrollOffset.top += $(this).scrollTop();
