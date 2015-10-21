@@ -63,7 +63,7 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
               }
 
               if (this.tagName != 'html') {
-                console.log(this.tagName);
+                console.log(this.tagName + " " + $(this).attr('id'));
                 scrollOffset.left += $(this).scrollLeft();
                 scrollOffset.top += $(this).scrollTop();
               }
