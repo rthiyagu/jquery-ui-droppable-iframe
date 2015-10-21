@@ -60,8 +60,10 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
             scrollOffset = { left: 0, top: 0 };
             
             $(doc.defaultView || doc.parentWindow).frameElement.parents().map({
+              console.log(this.tagName + " " + $(this).attr("id"));
               scrollOffset.left += $(this).scrollLeft();
               scrollOffset.top += $(this).scrollTop();
+              console.log($(this).scrollLeft() + " " + $(this).scrollTop());
             });
 
             // Add the frame and scroll offsets to the calculated offset
