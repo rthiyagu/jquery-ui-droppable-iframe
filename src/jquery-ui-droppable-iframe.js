@@ -8,7 +8,7 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
         m = $.ui.ddmanager.droppables[t.options.scope] || [],
         type = event ? event.type : null, // workaround for #2317
         list = (t.currentItem || t.element).find(":data(ui-droppable)").addBack(),
-        doc, frameOffset;
+        doc, frameOffset, scrollOffset;
  
     droppablesLoop: for (i = 0; i < m.length; i++) {
  
@@ -57,8 +57,15 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
             }
             
             // Determine the scroll offset
-            scrollOffset = { left: m[i].element.parents().find("html,body").scrollLeft(), top: m[i].element.parents().find("html,body").scrollTop() };
- 
+            m[i].element.parents().map(function() {
+              if (!scrollOffset) {
+                scrollOffset = { left: 0, top: 0 };
+              }
+              
+              scrollOffset.left += this.scrollLeft();
+              scrollOffset.top += this.scrollTop();
+            });
+
             // Add the frame and scroll offsets to the calculated offset
             m[i].offset.left += frameOffset.left + scrollOffset.left;
             m[i].offset.top += frameOffset.top + scrollOffset.top;
