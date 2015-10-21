@@ -61,15 +61,11 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
               if (!scrollOffset) {
                 scrollOffset = { left: 0, top: 0 };
               }
-              
-              if (this instanceof jQuery) {
-               console.log('I am');
-              }
 
               if (this.tagName != 'html') {
                 console.log(this.tagName);
-                //scrollOffset.left += this.scrollLeft();
-                scrollOffset.top += this.scrollTop();
+                scrollOffset.left += $(this).scrollLeft();
+                scrollOffset.top += $(this).scrollTop();
               }
             });
 
