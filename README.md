@@ -15,6 +15,9 @@ The plugin does *not*:
 - support multiple nested iframes (TBD)
 - horizontal scrolling (TBD)
 
+# Demo
+See some basic examples [here](http://kamelkev.github.io/jquery-ui-droppable-iframe)
+
 # Usage
 
 The library works by overriding a deficient method contained with jquery-ui. To use it, simply include a script reference to the associated javascript immediately after you have referenced jquery-ui.
