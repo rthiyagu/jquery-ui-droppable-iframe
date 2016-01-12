@@ -8,12 +8,12 @@ An IFrame (Inline Frame) is an HTML document embedded inside another HTML docume
 
 This plugin seeks to resolve these issues. The current version:
 - accounts for all offsets between the top window and a nested iframe
-- accounts for vertical scrolling within the top window
-- accounts for all scrolling within the iframe itself
+- accounts for vertical scrolling within the iframe itself
 
 The plugin does *not*:
+- accounts for scrolling within the top window (TBD)
 - support multiple nested iframes (TBD)
-- horizontal scrolling (TBD)
+- account for horizontal scrolling within the iframe (TBD)
 
 # Demo
 See some basic examples [here](http://kamelkev.github.io/jquery-ui-droppable-iframe)
