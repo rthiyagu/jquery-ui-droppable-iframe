@@ -9,11 +9,12 @@ An IFrame (Inline Frame) is an HTML document embedded inside another HTML docume
 This plugin seeks to resolve these issues. The current version:
 - accounts for all offsets between the top window and a nested iframe
 - accounts for vertical scrolling within the iframe itself
+- accounts for vertical scrolling within the top window
 
 The plugin does *not*:
-- accounts for scrolling within the top window (TBD)
+- account for any scrolling made within intermediate elements between the iframe and the top window
+- account for horizontal scrolling within both the iframe and top window
 - support multiple nested iframes (TBD)
-- account for horizontal scrolling within the iframe (TBD)
 
 # Demo
 See some basic examples [here](http://kamelkev.github.io/jquery-ui-droppable-iframe)
@@ -22,6 +23,15 @@ See some basic examples [here](http://kamelkev.github.io/jquery-ui-droppable-ifr
 
 The library works by overriding a deficient method contained with jquery-ui. To use it, simply include a script reference to the associated javascript immediately after you have referenced jquery-ui.
 
-# Credits
+# Author
 
-Original code by [Craig Michael Thompson](http://blog.craigsworks.com); see [http://blog.craigsworks.com/jquery-ui-draggable-droppables-in-an-iframe](http://blog.craigsworks.com/jquery-ui-draggable-droppables-in-an-iframe)
+- [Kevin Kamel](https://github.com/kamelkev)
+
+# Contributors
+
+- [Chelsea Rio](http://github.com/chelseario)
+- [Craig Michael Thompson](http://blog.craigsworks.com); see the original proposal that led to this plugin [here](http://blog.craigsworks.com/jquery-ui-draggable-droppables-in-an-iframe).
+
+# Sponsor
+
+This code has been developed under sponsorship of [MailerMailer LLC](http://www.mailermailer.com).
