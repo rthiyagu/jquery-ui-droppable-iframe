@@ -87,6 +87,10 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
             $(frameElement).parents().each(function() {
               console.log('extracting scroll from' + this.tagName);
 
+              if (this.tagName === 'HTML') {
+                return; // do not account for document scroll, only element scroll
+              }
+
               elementRect.left -= $(this).scrollLeft();
               elementRect.top -= $(this).scrollTop();
 
@@ -99,15 +103,21 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
 
             // account for the offset between the viewport itself and the element
 
-            elementRect.top += viewportRect.top;
-            elementRect.bottom += viewportRect.top;
             elementRect.left += viewportRect.left;
+            elementRect.top += viewportRect.top;
+
             elementRect.right += viewportRect.left;
+            elementRect.bottom += viewportRect.top;
 
             console.log(elementRect.top);
             console.log(elementRect.bottom);
 
-            var adjusted = 0;
+            // assign the top and left with the adjusted elementRect data, this covers the most common case
+            // but we need to account for when elements are beyond the viewport and adjust them appropriately
+            m[i].offset.top = elementRect.top;
+            m[i].offset.left = elementRect.left;
+
+            // top of frame > top of element
             if (viewportRect.top > elementRect.top) {
                console.log('---------------- Truncated Top--------------');
                console.log('m[i].offset.top ' + m[i].offset.top);
@@ -115,9 +125,6 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
 
                proportions.height -= (viewportRect.top - elementRect.top);
                m[i].offset.top = viewportRect.top;
-               m[i].offset.left = elementRect.left;
-
-               adjusted = 1;
             }
 
             // bottom of frame < bottom element
@@ -127,23 +134,37 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
                console.log('proportions.height ' + proportions.height);
 
                proportions.height -= (elementRect.bottom - viewportRect.bottom);
-               m[i].offset.top = elementRect.top;
-               m[i].offset.left = elementRect.left;
-
-               adjusted = 1;
             }
 
-            if (!adjusted) {
-              console.log('---------------- Fully Exposed --------------');
-              console.log('m[i].offset.top ' + m[i].offset.top);
-              console.log('proportions.height ' + proportions.height);
+            // left of frame > left of element
+            if (viewportRect.left > elementRect.left) {
+               console.log('---------------- Truncated left--------------');
+               console.log('m[i].offset.left ' + m[i].offset.left);
+               console.log('proportions.width ' + proportions.width);
 
-              m[i].offset.top = elementRect.top;
-              m[i].offset.left = elementRect.left;
+               proportions.width -= (viewportRect.left - elementRect.left);
+               m[i].offset.left = viewportRect.left;
+            }
+
+            console.log(viewportRect.right);
+            console.log(elementRect.right);
+
+            // right of frame < right of element
+            if (viewportRect.right < elementRect.right) {
+               console.log('---------------- Truncated right--------------');
+               console.log('m[i].offset.left ' + m[i].offset.left);
+               console.log('proportions.width ' + proportions.width);
+
+               proportions.width -= (elementRect.right - viewportRect.right);
             }
 
             console.log('modified proportions.height to' + proportions.height);
+            console.log('modified proportions.left to' + proportions.left);
             console.log('modified m[i].offset.top to' + m[i].offset.top);
+            console.log('modified m[i].offset.left to' + m[i].offset.left);
         }
+
+        m[i].offset.top += $('html').scrollTop(); // account for page scroll
+        m[i].offset.left += $('html').scrollLeft(); // account for page scroll
     }
 };
