@@ -12,7 +12,7 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
  
     droppablesLoop: for (i = 0; i < m.length; i++) {
  
-        //No disabled and non-accepted
+        // No disabled and non-accepted
         if (m[i].options.disabled || (t && !m[i].accept.call(m[i].element[0], (t.currentItem || t.element)))) {
             continue;
         }
@@ -30,7 +30,7 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
             continue;
         }
  
-        //Activate the droppable if used directly from draggables
+        // Activate the droppable if used directly from draggables
         if (type === "mousedown") {
             m[i]._activate.call(m[i], event);
         }
@@ -51,7 +51,7 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
             // Determine in the frame offset using cached offset (if already calculated)
             frameOffset = $.ui.ddmanager.frameOffsets[doc];
             if (!frameOffset) {
-                console.log('calculating, no cache found?');
+                // console.log('calculating, no cache found?');
 
                 // Calculate offset, different browsers store it on different properties (IE...)
                 frameOffset = $(frameElement).offset();
@@ -60,7 +60,7 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
                 $.ui.ddmanager.frameOffsets[doc] = frameOffset;
             }
 
-            console.log('Handling element: ' + i);
+            // console.log('Handling element: ' + i);
 
             // calculate the effective viewport boundaries containing the element, taking wrapping divs and soforth into account
 
@@ -81,11 +81,11 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
             var abstractElementRect = m[i].element[0].getBoundingClientRect();
             var elementRect = { top: abstractElementRect.top, bottom: abstractElementRect.bottom, right: abstractElementRect.right, left: abstractElementRect.left };
 
-            console.log(elementRect.top);
-            console.log(elementRect.bottom);
+            // console.log(elementRect.top);
+            // console.log(elementRect.bottom);
 
             $(frameElement).parents().each(function() {
-              console.log('extracting scroll from' + this.tagName);
+              // console.log('extracting scroll from' + this.tagName);
 
               if (this.tagName === 'HTML') {
                 return; // do not account for document scroll, only element scroll
@@ -98,8 +98,8 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
               elementRect.bottom -= $(this).scrollTop();
             });
 
-            console.log(elementRect.top);
-            console.log(elementRect.bottom);
+            // console.log(elementRect.top);
+            // console.log(elementRect.bottom);
 
             // account for the offset between the viewport itself and the element
 
@@ -109,8 +109,8 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
             elementRect.right += viewportRect.left;
             elementRect.bottom += viewportRect.top;
 
-            console.log(elementRect.top);
-            console.log(elementRect.bottom);
+            // console.log(elementRect.top);
+            // console.log(elementRect.bottom);
 
             // assign the top and left with the adjusted elementRect data, this covers the most common case
             // but we need to account for when elements are beyond the viewport and adjust them appropriately
@@ -119,9 +119,9 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
 
             // top of frame > top of element
             if (viewportRect.top > elementRect.top) {
-               console.log('---------------- Truncated Top--------------');
-               console.log('m[i].offset.top ' + m[i].offset.top);
-               console.log('proportions.height ' + proportions.height); 
+               // console.log('---------------- Truncated Top--------------');
+               // console.log('m[i].offset.top ' + m[i].offset.top);
+               // console.log('proportions.height ' + proportions.height); 
 
                proportions.height -= (viewportRect.top - elementRect.top);
                m[i].offset.top = viewportRect.top;
@@ -129,39 +129,39 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
 
             // bottom of frame < bottom element
             if (viewportRect.bottom < elementRect.bottom) {
-               console.log('---------------- Truncated Bottom--------------');
-               console.log('m[i].offset.top ' + m[i].offset.top);
-               console.log('proportions.height ' + proportions.height);
+               // console.log('---------------- Truncated Bottom--------------');
+               // console.log('m[i].offset.top ' + m[i].offset.top);
+               // console.log('proportions.height ' + proportions.height);
 
                proportions.height -= (elementRect.bottom - viewportRect.bottom);
             }
 
             // left of frame > left of element
             if (viewportRect.left > elementRect.left) {
-               console.log('---------------- Truncated left--------------');
-               console.log('m[i].offset.left ' + m[i].offset.left);
-               console.log('proportions.width ' + proportions.width);
+               // console.log('---------------- Truncated left--------------');
+               // console.log('m[i].offset.left ' + m[i].offset.left);
+               // console.log('proportions.width ' + proportions.width);
 
                proportions.width -= (viewportRect.left - elementRect.left);
                m[i].offset.left = viewportRect.left;
             }
 
-            console.log(viewportRect.right);
-            console.log(elementRect.right);
+            // console.log(viewportRect.right);
+            // console.log(elementRect.right);
 
             // right of frame < right of element
             if (viewportRect.right < elementRect.right) {
-               console.log('---------------- Truncated right--------------');
-               console.log('m[i].offset.left ' + m[i].offset.left);
-               console.log('proportions.width ' + proportions.width);
+               // console.log('---------------- Truncated right--------------');
+               // console.log('m[i].offset.left ' + m[i].offset.left);
+               // console.log('proportions.width ' + proportions.width);
 
                proportions.width -= (elementRect.right - viewportRect.right);
             }
 
-            console.log('modified proportions.height to' + proportions.height);
-            console.log('modified proportions.left to' + proportions.left);
-            console.log('modified m[i].offset.top to' + m[i].offset.top);
-            console.log('modified m[i].offset.left to' + m[i].offset.left);
+            // console.log('modified proportions.height to' + proportions.height);
+            // console.log('modified proportions.left to' + proportions.left);
+            // console.log('modified m[i].offset.top to' + m[i].offset.top);
+            // console.log('modified m[i].offset.left to' + m[i].offset.left);
         }
 
         m[i].offset.top += $('html').scrollTop(); // account for page scroll
