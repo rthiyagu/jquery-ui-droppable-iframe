@@ -10,11 +10,13 @@ This plugin seeks to resolve these issues. The current version:
 - accounts for all offsets between the top window and a nested iframe
 - accounts for vertical scrolling within the iframe itself
 - accounts for vertical scrolling within the top window
+- accounts for horizontal scrolling within the iframe itself
+- accounts for horizontal scrolling within the top window
+- account for any scrolling made within a single nested intermediate element (div) between the iframe and the top window
 
 The plugin does *not*:
-- account for any scrolling made within intermediate elements between the iframe and the top window
-- account for horizontal scrolling within both the iframe and top window
 - support multiple nested iframes (TBD)
+- support multiple nested intermediate elements between the iframe and the top window (TBD)
 
 # Demo
 See some basic examples [here](http://kamelkev.github.io/jquery-ui-droppable-iframe)
