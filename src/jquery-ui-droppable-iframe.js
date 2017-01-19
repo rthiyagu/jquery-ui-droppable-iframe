@@ -87,7 +87,7 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
             $(frameElement).parents().each(function() {
               // console.log('extracting scroll from' + this.tagName);
 
-              if (this.tagName === 'HTML') {
+              if (this.tagName === 'HTML' || this.tagName === 'BODY') {
                 return; // do not account for document scroll, only element scroll
               }
 
@@ -164,7 +164,7 @@ $.ui.ddmanager.prepareOffsets = function (t, event) {
             // console.log('modified m[i].offset.left to' + m[i].offset.left);
         }
 
-        m[i].offset.top += $('html').scrollTop(); // account for page scroll
-        m[i].offset.left += $('html').scrollLeft(); // account for page scroll
+        m[i].offset.top += $(document).scrollTop(); // account for page scroll
+        m[i].offset.left += $(document).scrollLeft(); // account for page scroll
     }
 };
