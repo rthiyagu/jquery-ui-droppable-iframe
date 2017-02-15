@@ -1,0 +1,13 @@
+all: clean build
+ 
+clean:
+	rm -f src/*.min.js
+
+lint: clean
+	jshint src/jquery-ui-droppable-iframe.js
+ 
+build:
+	uglifyjs src/jquery-ui-droppable-iframe.js --screw-ie8 --compress sequences=true,properties=true,dead_code=true,drop_debugger=true,conditionals=true,comparisons=true,evaluate=true,booleans=true,loops=true,unused=true,hoist_funs=true,if_return=true,join_vars=true,cascade=true,warnings=true,negate_iife=true -m --mangle-props 2 >> src/jquery-ui-droppable-iframe.min.js
+
+setup:
+	npm install jshint uglifyjs -g
