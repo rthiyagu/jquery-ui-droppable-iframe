@@ -19,7 +19,7 @@ The plugin does *not*:
 - support multiple nested intermediate elements between the iframe and the top window (TBD)
 
 # Demo
-See some basic examples [here](http://kamelkev.github.io/jquery-ui-droppable-iframe)
+See some basic examples [here](http://kamelkev.github.io/jquery-ui-droppable-iframe/text/index.html)
 
 # Usage
 
