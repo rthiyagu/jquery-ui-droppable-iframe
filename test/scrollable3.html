@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="text/html" http-equiv="Content-Type">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
+
+    <script src="../src/jquery-ui-droppable-iframe.js" type="text/javascript"></script>
+    <script>
+      $(document).ready(function() {
+        $('#iframe').load(function () {
+          $('#iframe-container').scrollTop(58);
+
+          $('.iframe-dropzone', frames['iframe'].document).droppable({
+            iframeFix: true,
+            hoverClass: 'dropzone-hover',
+            drop: function( event, ui ) {
+              alert('dropped!');
+            }
+          });
+
+          // Make blue box draggable
+          $('.draggable').draggable({
+            iframeFix: true,
+            helper: 'clone',
+            revert: 'invalid'
+          });
+        });
+      });
+    </script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #e0e0e0;
+        margin: 20px;
+        font-family: Helvetica;
+        color: #333333;
+      }
+
+      #draggables-container {
+        margin-bottom: 20px;
+      }
+
+      .draggable {
+        background-color: #2dadff;
+        width: 30px;
+        height: 30px;
+      }
+
+      #notes{
+        color: #777;
+        font-style: italic;
+      }
+
+      #iframe-container {
+        float: left;
+        height: 300px;
+        overflow-y: scroll;
+      }
+
+      iframe {
+        float: left;
+        border: 0;
+        background-color: #ffffff;
+      }
+
+      .clearfix:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper" class="clearfix">
+      <div id="draggables-container">
+        <div id="help-text">
+          <p>iFrame container force scrolled to generate 3 elements: truncated top, fully exposed, truncated bottom</p>
+        </div>
+        <div class="draggable"></div>
+      </div>
+      <div id="iframe-container">
+        <iframe name="iframe" id="iframe" src="scrollable3.iframe.html" height="1000" scrolling="no"></iframe>
+      </div>
+    </div>
+  </body>
+</html>
